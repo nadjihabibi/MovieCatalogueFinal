@@ -21,28 +21,14 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ListViewHold
     public Context context;
     private OnItemMovieClickCallback onItemMovieClickCallback;
 
-    public MovieAdapter(ArrayList<Movie> list) {
-        this.list = list;
-    }
-
     public MovieAdapter(Context context) {
         this.context = context;
-    }
-
-    public void setList(ArrayList<Movie> items) {
-        list.clear();
-        list.addAll(items);
-        notifyDataSetChanged();
     }
 
     public void setFavMovie(ArrayList<Movie> listMovie) {
         this.list = new ArrayList<>();
         this.list.addAll(listMovie);
         notifyDataSetChanged();
-    }
-
-    public ArrayList<Movie> getListMovie() {
-        return list;
     }
 
     public interface OnItemMovieClickCallback {

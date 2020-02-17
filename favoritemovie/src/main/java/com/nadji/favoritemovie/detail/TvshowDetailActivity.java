@@ -1,6 +1,5 @@
 package com.nadji.favoritemovie.detail;
 
-import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
@@ -9,6 +8,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,7 +16,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.bumptech.glide.Glide;
 import com.nadji.favoritemovie.R;
 import com.nadji.favoritemovie.entity.TvShow;
-import com.nadji.favoritemovie.helper.MappingHelper;
 
 import java.util.Objects;
 
@@ -24,7 +23,6 @@ import static com.nadji.favoritemovie.helper.DatabaseContract.MovieColumns.CONTE
 
 public class TvshowDetailActivity extends AppCompatActivity {
     public static final String EXTRA_TV = "extra_tvshow";
-    //    private FavoriteHelper favoriteHelper;
     private TvShow tvShow;
     ProgressBar progressBar;
     private Uri uriWithId;
@@ -35,7 +33,6 @@ public class TvshowDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_tvshow_detail);
         tvShow = getIntent().getParcelableExtra(EXTRA_TV);
         progressBar = findViewById(R.id.progressBar_detail_tvshow);
-
         setTitle(getResources().getString(R.string.title_tvshow));
 
         ImageView imgPoster = findViewById(R.id.img_poster_tvshow);
@@ -49,14 +46,7 @@ public class TvshowDetailActivity extends AppCompatActivity {
         tvRilis.setText(tvShow.getReleaseDate());
         tvDesc.setText(tvShow.getOverview());
 
-        uriWithId = Uri.parse(CONTENT_URI_TVSHOW + "/" + tvShow.getId());
-        if (uriWithId != null) {
-            Cursor cursor = getContentResolver().query(uriWithId, null, null, null, null);
-            if (cursor != null) {
-                tvShow = MappingHelper.mapCursorToObjectTvShow(cursor);
-                cursor.close();
-            }
-        }
+        uriWithId = Uri.parse(CONTENT_URI_TVSHOW + "/" + tvShow.getIdT());
 
         showLoading(true);
         if (tvShow != null) {
@@ -68,6 +58,7 @@ public class TvshowDetailActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.already_favorite, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -75,6 +66,12 @@ public class TvshowDetailActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
             super.onBackPressed();
+        }
+
+        if (item.getItemId() == R.id.action_delete_fav) {
+            item.setIcon(R.drawable.ic_favorite_border);
+            getContentResolver().delete(uriWithId, null, null);
+            Toast.makeText(TvshowDetailActivity.this, getResources().getString(R.string.success_delete_favorite), Toast.LENGTH_SHORT).show();
         }
         return super.onOptionsItemSelected(item);
     }

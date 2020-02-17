@@ -37,4 +37,7 @@
     <string name="daily_reminder_cancel">Daily Reminder Canceled</string>
     <string name="release_today_reminder">Release Today Reminder setup</string>
     <string name="release_today_cancel">Release today reminder canceled</string>
+    <string name="appwidget_text">Favorite Movies Banner</string>
+    <string name="add_widget">Add widget</string>
+    <string name="empty_text">NO DATA 1234</string>
 </resources>

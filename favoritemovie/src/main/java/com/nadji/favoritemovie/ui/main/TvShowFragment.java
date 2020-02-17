@@ -14,7 +14,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -41,8 +40,7 @@ public class TvShowFragment extends Fragment implements LoadTvShowCallback {
     public ArrayList<TvShow> listFavTvshow = new ArrayList<>();
     private RecyclerView rvFavTvshow;
     private ProgressBar progressBar;
-    private TextView tv;
-
+    private TextView tvTvShow;
 
     public TvShowFragment() {
         // Required empty public constructor
@@ -62,18 +60,18 @@ public class TvShowFragment extends Fragment implements LoadTvShowCallback {
         rvFavTvshow.setHasFixedSize(true);
         adapter = new TvshowAdapter(getContext());
         adapter.notifyDataSetChanged();
-//        rvFavTvshow.setAdapter(adapter);
-//        tv = getView().findViewById(R.id.tv_tvshowfav);
+        rvFavTvshow.setAdapter(adapter);
+        tvTvShow = getView().findViewById(R.id.tv_tvshowfav);
+
+        HandlerThread handlerThread = new HandlerThread("DataObserver");
+        handlerThread.start();
+        Handler handler = new Handler(handlerThread.getLooper());
+
+        DataObserver myObserver = new DataObserver(handler, getContext());
+        getContext().getContentResolver().registerContentObserver(CONTENT_URI_TVSHOW, true, myObserver);
 //
-//        HandlerThread handlerThread = new HandlerThread("DataObserver");
-//        handlerThread.start();
-//        Handler handler = new Handler(handlerThread.getLooper());
-//
-//        DataObserver myObserver = new DataObserver(handler, getContext());
-//        getContext().getContentResolver().registerContentObserver(CONTENT_URI_TVSHOW, true, myObserver);
-//
-//        new LoadMovieAsync(getContext(), this).execute();
-//        adapter.setFavTvShow(listFavTvshow);
+        new LoadMovieAsync(getContext(), this).execute();
+        adapter.setFavTvShow(listFavTvshow);
 
         adapter.setOnItemTvShowClickCallback(new TvshowAdapter.OnItemTvShowClickCallback() {
             @Override
@@ -83,9 +81,7 @@ public class TvShowFragment extends Fragment implements LoadTvShowCallback {
                 startActivity(toDetail);
             }
         });
-//        showLoading(false);
         super.onStart();
-
     }
 
     @Override
@@ -103,20 +99,11 @@ public class TvShowFragment extends Fragment implements LoadTvShowCallback {
     @Override
     public void postExecute(ArrayList<TvShow> tvShows) {
         progressBar.setVisibility(View.INVISIBLE);
-        if (tvShows.size()>0){
+        if (tvShows.size() > 0) {
             adapter.setFavTvShow(tvShows);
-            tv.setText("");
-        }else {
-            tv.setText(getString(R.string.empty_tvshow_data));
-        }
-    }
-
-    private static class DataObserver extends ContentObserver {
-        final Context context;
-
-        public DataObserver(Handler handler, Context context) {
-            super(handler);
-            this.context = context;
+            tvTvShow.setText("");
+        } else {
+            tvTvShow.setText(getString(R.string.empty_tvshow_data));
         }
     }
 
@@ -146,6 +133,20 @@ public class TvShowFragment extends Fragment implements LoadTvShowCallback {
         protected void onPostExecute(ArrayList<TvShow> tvShows) {
             super.onPostExecute(tvShows);
             weakCallback.get().postExecute(tvShows);
+        }
+    }
+
+    private static class DataObserver extends ContentObserver {
+        final Context context;
+
+        public DataObserver(Handler handler, Context context) {
+            super(handler);
+            this.context = context;
+        }
+
+        @Override
+        public void onChange(boolean selfChange) {
+            super.onChange(selfChange);
         }
     }
 }

@@ -25,11 +25,12 @@ import com.nadji.favoritemovie.R;
 import com.nadji.favoritemovie.adapter.MovieAdapter;
 import com.nadji.favoritemovie.detail.MovieDetailActivity;
 import com.nadji.favoritemovie.entity.Movie;
-import com.nadji.favoritemovie.helper.DatabaseContract;
 import com.nadji.favoritemovie.helper.MappingHelper;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+
+import static com.nadji.favoritemovie.helper.DatabaseContract.MovieColumns.CONTENT_URI_MOVIE;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -39,8 +40,7 @@ public class MovieFragment extends Fragment implements LoadMovieCallback {
     private RecyclerView rvMovie;
     private ArrayList<Movie> listMovie = new ArrayList<>();
     private ProgressBar progressBar;
-    private TextView tv;
-
+    private TextView tvMovie;
 
     public MovieFragment() {
         // Required empty public constructor
@@ -60,15 +60,14 @@ public class MovieFragment extends Fragment implements LoadMovieCallback {
         adapterMovie = new MovieAdapter(getContext());
         adapterMovie.notifyDataSetChanged();
         rvMovie.setAdapter(adapterMovie);
-        tv = getView().findViewById(R.id.tv_moviefav);
+        tvMovie = getView().findViewById(R.id.tv_moviefav);
 
         HandlerThread handlerThread = new HandlerThread("DataObserver");
         handlerThread.start();
         Handler handler = new Handler(handlerThread.getLooper());
 
         DataObserver myObserver = new DataObserver(handler, getContext());
-        getContext().getContentResolver().registerContentObserver(DatabaseContract
-                .MovieColumns.CONTENT_URI_MOVIE, true, myObserver);
+        getContext().getContentResolver().registerContentObserver(CONTENT_URI_MOVIE, true, myObserver);
 
         new LoadMovieAsync(getContext(), this).execute();
         adapterMovie.setFavMovie(listMovie);
@@ -83,7 +82,6 @@ public class MovieFragment extends Fragment implements LoadMovieCallback {
         });
 
         super.onStart();
-//        showLoading(false);
     }
 
     @Override
@@ -103,9 +101,9 @@ public class MovieFragment extends Fragment implements LoadMovieCallback {
         progressBar.setVisibility(View.INVISIBLE);
         if (movies.size() > 0) {
             adapterMovie.setFavMovie(movies);
-            tv.setText("");
+            tvMovie.setText("");
         } else {
-            tv.setText(getString(R.string.empty_movie_data));
+            tvMovie.setText(getString(R.string.empty_movie_data));
         }
     }
 
@@ -127,8 +125,7 @@ public class MovieFragment extends Fragment implements LoadMovieCallback {
         @Override
         protected ArrayList<Movie> doInBackground(Void... voids) {
             Context context = weakContext.get();
-            Cursor dataCursor = context.getContentResolver().query(DatabaseContract.MovieColumns
-                    .CONTENT_URI_MOVIE, null, null, null, null);
+            Cursor dataCursor = context.getContentResolver().query(CONTENT_URI_MOVIE, null, null, null, null);
             return MappingHelper.mapCursorToArrayListMovie(dataCursor);
         }
 

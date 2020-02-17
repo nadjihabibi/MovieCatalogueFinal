@@ -24,6 +24,7 @@ import java.util.Objects;
 
 import static com.nadji.moviecatalogue.db.DatabaseContract.MovieColumns.CONTENT_URI_TVSHOW;
 import static com.nadji.moviecatalogue.db.DatabaseContract.MovieColumns.IDM;
+import static com.nadji.moviecatalogue.db.DatabaseContract.MovieColumns.IDT;
 import static com.nadji.moviecatalogue.db.DatabaseContract.MovieColumns.NAME;
 import static com.nadji.moviecatalogue.db.DatabaseContract.MovieColumns.OVERVIEW;
 import static com.nadji.moviecatalogue.db.DatabaseContract.MovieColumns.POSTER;
@@ -57,7 +58,6 @@ public class TvshowDetailActivity extends AppCompatActivity {
         tvDesc.setText(tvShow.getOverview());
 
         uriWithId = Uri.parse(CONTENT_URI_TVSHOW + "/" + tvShow.getIdT());
-        Log.e("CEK URI TV", "" + uriWithId);
 
         favoriteHelper = FavoriteHelper.getInstance(getApplicationContext());
         favoriteHelper.open();
@@ -87,13 +87,12 @@ public class TvshowDetailActivity extends AppCompatActivity {
         }
 
         ContentValues values = new ContentValues();
-        values.put(IDM, tvShow.getId());
+        values.put(IDT, tvShow.getIdT());
         values.put(NAME, tvShow.getName());
         values.put(POSTER, tvShow.getPoster());
         values.put(OVERVIEW, tvShow.getOverview());
         values.put(USER_SCORE, tvShow.getUserScore());
         values.put(RELEASE_DATE, tvShow.getReleaseDate());
-
 
         if (item.getItemId() == R.id.action_add_fav) {
             getContentResolver().insert(CONTENT_URI_TVSHOW, values);

@@ -12,6 +12,7 @@ public class DatabaseContract {
 
     public static final class MovieColumns implements BaseColumns {
         public static final String IDM = "idM";
+        public static final String IDT = "idT";
         public static final String NAME = "name";
         public static final String TITLE = "title";
         public static final String OVERVIEW = "overview";

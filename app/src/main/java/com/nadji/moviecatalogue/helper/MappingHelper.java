@@ -43,13 +43,13 @@ public class MappingHelper {
 
         while (tvshowCursor.moveToNext()) {
             int id = tvshowCursor.getInt(tvshowCursor.getColumnIndexOrThrow(DatabaseContract.MovieColumns._ID));
-            int idm = tvshowCursor.getInt(tvshowCursor.getColumnIndexOrThrow(DatabaseContract.MovieColumns.IDM));
+            int idT = tvshowCursor.getInt(tvshowCursor.getColumnIndexOrThrow(DatabaseContract.MovieColumns.IDT));
             String title = tvshowCursor.getString(tvshowCursor.getColumnIndexOrThrow(DatabaseContract.MovieColumns.NAME));
             String overview = tvshowCursor.getString(tvshowCursor.getColumnIndexOrThrow(DatabaseContract.MovieColumns.OVERVIEW));
             String releaseDate = tvshowCursor.getString(tvshowCursor.getColumnIndexOrThrow(DatabaseContract.MovieColumns.RELEASE_DATE));
             String poster = tvshowCursor.getString(tvshowCursor.getColumnIndexOrThrow(DatabaseContract.MovieColumns.POSTER));
             String userScore = tvshowCursor.getString(tvshowCursor.getColumnIndexOrThrow(DatabaseContract.MovieColumns.USER_SCORE));
-            tvShowsList.add(new TvShow(id, idm, title, overview, releaseDate, poster, userScore));
+            tvShowsList.add(new TvShow(id, idT, title, overview, releaseDate, poster, userScore));
         }
         return tvShowsList;
     }

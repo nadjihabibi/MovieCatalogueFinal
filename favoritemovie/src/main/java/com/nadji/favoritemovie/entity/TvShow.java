@@ -5,6 +5,7 @@ import android.os.Parcelable;
 
 public class TvShow implements Parcelable {
     private int id;
+    private int idT;
     private String name;
     private String overview;
     private String releaseDate;
@@ -13,8 +14,9 @@ public class TvShow implements Parcelable {
 
     public TvShow(){}
 
-    public TvShow(int id, String name, String overview, String releaseDate, String poster, String userScore){
+    public TvShow(int id, int idT, String name, String overview, String releaseDate, String poster, String userScore){
         this.id = id;
+        this.idT = idT;
         this.name = name;
         this.overview = overview;
         this.releaseDate = releaseDate;
@@ -24,6 +26,7 @@ public class TvShow implements Parcelable {
 
     protected TvShow(Parcel in) {
         id = in.readInt();
+        idT = in.readInt();
         name = in.readString();
         overview = in.readString();
         releaseDate = in.readString();
@@ -49,6 +52,14 @@ public class TvShow implements Parcelable {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getIdT() {
+        return idT;
+    }
+
+    public void setIdT(int idT) {
+        this.idT = idT;
     }
 
     public String getName() {
@@ -99,6 +110,7 @@ public class TvShow implements Parcelable {
     @Override
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeInt(id);
+        parcel.writeInt(idT);
         parcel.writeString(name);
         parcel.writeString(overview);
         parcel.writeString(releaseDate);

@@ -1,8 +1,7 @@
 <resources>
-    <string name="app_name">MovieCatalogue</string>
+    <string name="app_name">Favorite Movies</string>
     <string name="title_movies">Movies</string>
     <string name="title_tvshow">Tv Show</string>
-    <string name="title_favorite">Favorite</string>
 
     <string name="description">Description</string>
     <string name="title">Title</string>
@@ -11,32 +10,10 @@
     <string name="poster_desc">Poster Movie</string>
     <string name="user_score">User Score :</string>
 
-    <string name="success_add_favorite">Successfully add to favorite</string>
-    <string name="failed__add_favorite">Failed add to favorite</string>
     <string name="success_delete_favorite">Successfully remove from favorite </string>
-    <string name="failed__delete_favorite">Failed remove from favorite</string>
-    <string name="favorite_is_exist">You have added this item to favorite</string>
-    <string name="add_to_fav">add_to_fav</string>
     <string name="delete_from_fav">delete_from_fav</string>
 
-    <string name="change_language_settings">Change Language</string>
-    <string name="search">Search</string>
-    <string name="search_hint">Input Search</string>
-    <string name="movie_search">Movie Search</string>
-    <string name="tvshow_search">TvShow Search</string>
-
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="reminder_setting">Reminder setting</string>
-    <string name="daily_reminder">Daily reminder</string>
-    <string name="release_today">Release Today Reminde</string>
-    <string name="return_toapp">Reminder for return to App</string>
-    <string name="release_reminder">Reminder release today movie</string>
-    <string name="title_daily_reminder">Hi Good Morning !!</string>
-    <string name="message_daily_reminder">Let\'s Open MoviesApp</string>
-    <string name="daily_reminder_setup">Daily Reminder set up</string>
-    <string name="daily_reminder_cancel">Daily Reminder Canceled</string>
-    <string name="release_today_reminder">Release Today Reminder setup</string>
-    <string name="release_today_cancel">Release today reminder canceled</string>
     <string name="tab_movie">Movie Favorite</string>
     <string name="tab_tvshow">Tv Show Favorite</string>
     <string name="empty_movie_data">Data Favorite Movie not available</string>

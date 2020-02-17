@@ -42,7 +42,6 @@ public class TvShowViewModel extends ViewModel {
                     for (int i = 0; i < result.length(); i++) {
                         JSONObject tvShow = result.getJSONObject(i);
                         TvShow tvShowItems = new TvShow();
-
                         tvShowItems.setIdT(tvShow.getInt("id"));
                         tvShowItems.setName(tvShow.getString("name"));
                         tvShowItems.setReleaseDate(tvShow.getString("first_air_date"));
