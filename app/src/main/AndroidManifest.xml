@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.nadji.moviecatalogue">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <permission
+        android:name="com.nadji.moviecatalogue.READ_DATABASE"
+        android:protectionLevel="normal" />
+    <permission
+        android:name="com.nadji.moviecatalogue.WRITE_DATABASE"
+        android:protectionLevel="normal" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".ui.SettingActivity"></activity>
+        <activity android:name=".ui.Search.SearchMovieActivity" />
+        <activity android:name=".ui.Search.SearchTvShowActivity" />
+
+        <provider
+            android:name=".provider.MovieProvider"
+            android:authorities="com.nadji.moviecatalogue"
+            android:enabled="true"
+            android:exported="true"
+            android:permission="com.nadji.moviecatalogue.READ_DATABASE"
+            android:writePermission="com.nadji.moviecatalogue.WRITE_DATABASE" />
+
+        <activity android:name=".ui.detail.TvshowDetailActivity" />
+        <activity android:name=".ui.detail.MovieDetailActivity" />
+
+
+        <receiver
+            android:name=".reminder.DailyReminder"
+            android:enabled="true"
+            android:exported="true" />
+        <receiver
+            android:name=".reminder.ReleaseMovieReminder"
+            android:enabled="true"
+            android:exported="true" />
+
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

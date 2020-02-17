@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MovieCatalogue</string>
+    <string name="title_movies">Movies</string>
+    <string name="title_tvshow">Tv Show</string>
+    <string name="title_favorite">Favorite</string>
+
+    <string name="description">Description</string>
+    <string name="title">Title</string>
+    <string name="release_date">Release Date : </string>
+    <string name="score">Score</string>
+    <string name="poster_desc">Poster Movie</string>
+    <string name="user_score">User Score :</string>
+
+    <string name="success_add_favorite">Successfully add to favorite</string>
+    <string name="failed__add_favorite">Failed add to favorite</string>
+    <string name="success_delete_favorite">Successfully remove from favorite </string>
+    <string name="failed__delete_favorite">Failed remove from favorite</string>
+    <string name="favorite_is_exist">You have added this item to favorite</string>
+    <string name="add_to_fav">add_to_fav</string>
+    <string name="delete_from_fav">delete_from_fav</string>
+
+    <string name="change_language_settings">Change Language</string>
+</resources>
