@@ -12,10 +12,7 @@
     <string name="user_score">User Score :</string>
 
     <string name="success_add_favorite">Successfully add to favorite</string>
-    <string name="failed__add_favorite">Failed add to favorite</string>
     <string name="success_delete_favorite">Successfully remove from favorite </string>
-    <string name="failed__delete_favorite">Failed remove from favorite</string>
-    <string name="favorite_is_exist">You have added this item to favorite</string>
     <string name="add_to_fav">add_to_fav</string>
     <string name="delete_from_fav">delete_from_fav</string>
 
@@ -38,6 +35,6 @@
     <string name="release_today_reminder">Release Today Reminder setup</string>
     <string name="release_today_cancel">Release today reminder canceled</string>
     <string name="appwidget_text">Favorite Movies Banner</string>
-    <string name="add_widget">Add widget</string>
     <string name="empty_text">NO DATA 1234</string>
+    <string name="add_widget">Add widget</string>
 </resources>

@@ -1,5 +1,6 @@
 package com.nadji.moviecatalogue.db;
 
+import android.database.Cursor;
 import android.net.Uri;
 import android.provider.BaseColumns;
 
@@ -30,6 +31,14 @@ public class DatabaseContract {
                 .appendPath(TABLE_FAVTVSHOW)
                 .build();
 
+    }
+
+    public static String getColumnString(Cursor cursor, String columnName) {
+        return cursor.getString(cursor.getColumnIndex(columnName));
+    }
+
+    public static int getColumnInt(Cursor cursor, String columnName) {
+        return cursor.getInt(cursor.getColumnIndex(columnName));
     }
 
 }

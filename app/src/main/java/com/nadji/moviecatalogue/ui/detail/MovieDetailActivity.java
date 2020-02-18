@@ -1,7 +1,9 @@
 package com.nadji.moviecatalogue.ui.detail;
 
+import android.appwidget.AppWidgetManager;
+import android.content.ComponentName;
 import android.content.ContentValues;
-import android.content.Intent;
+import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
@@ -97,24 +99,13 @@ public class MovieDetailActivity extends AppCompatActivity {
         if (item.getItemId() == R.id.action_add_fav) {
             getContentResolver().insert(CONTENT_URI_MOVIE, values);
             item.setIcon(R.drawable.ic_favorite);
-
-//            Intent i = new Intent(this, FavoriteMovieWidget.class);
-//            i.setAction(FavoriteMovieWidget.UPDATE_WIDGET, app);
-//            this.sendBroadcast(i);
-            Intent i = new Intent(getApplicationContext(), FavoriteMovieWidget.class);
-            i.setAction(UPDATE_WIDGET);
-            getApplicationContext().sendBroadcast(i);
-
-//            Intent widgetUpdateIntent = new Intent(context, MyClassName.UpdateService.class);
-//            context.startService(widgetUpdateIntent );
-
-
-
+            updateFavoriteMoviesStackWidget();
             Toast.makeText(MovieDetailActivity.this, getResources().getString(R.string.success_add_favorite), Toast.LENGTH_SHORT).show();
         } else if (item.getItemId() == R.id.action_delete_fav) {
             getContentResolver().delete(uriWithId, null, null);
             item.setIcon(R.drawable.ic_favorite_border);
             Toast.makeText(MovieDetailActivity.this, getResources().getString(R.string.success_delete_favorite), Toast.LENGTH_SHORT).show();
+            updateFavoriteMoviesStackWidget();
         }
         return super.onOptionsItemSelected(item);
     }
@@ -125,5 +116,13 @@ public class MovieDetailActivity extends AppCompatActivity {
         } else {
             progressBar.setVisibility(View.INVISIBLE);
         }
+    }
+
+    private void updateFavoriteMoviesStackWidget() {
+        Context context = getApplicationContext();
+        AppWidgetManager widgetManager = AppWidgetManager.getInstance(context);
+        ComponentName componentName = new ComponentName(context, FavoriteMovieWidget.class);
+        int[] idAppWidget = widgetManager.getAppWidgetIds(componentName);
+        widgetManager.notifyAppWidgetViewDataChanged(idAppWidget, R.id.stack_view);
     }
 }

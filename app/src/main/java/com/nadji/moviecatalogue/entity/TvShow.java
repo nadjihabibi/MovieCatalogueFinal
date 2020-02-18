@@ -1,7 +1,13 @@
 package com.nadji.moviecatalogue.entity;
 
+import android.database.Cursor;
 import android.os.Parcel;
 import android.os.Parcelable;
+
+import com.nadji.moviecatalogue.db.DatabaseContract;
+
+import static com.nadji.moviecatalogue.db.DatabaseContract.getColumnInt;
+import static com.nadji.moviecatalogue.db.DatabaseContract.getColumnString;
 
 public class TvShow implements Parcelable {
     private int id;
@@ -13,6 +19,16 @@ public class TvShow implements Parcelable {
     private String userScore;
 
     public TvShow() {
+    }
+
+    public TvShow(Cursor cursor){
+        this.id = getColumnInt(cursor, DatabaseContract.MovieColumns._ID);
+        this.idT = getColumnInt(cursor, DatabaseContract.MovieColumns.IDT);
+        this.name = getColumnString(cursor, DatabaseContract.MovieColumns.TITLE);
+        this.overview = getColumnString(cursor, DatabaseContract.MovieColumns.OVERVIEW);
+        this.releaseDate = getColumnString(cursor, DatabaseContract.MovieColumns.RELEASE_DATE);
+        this.poster = getColumnString(cursor, DatabaseContract.MovieColumns.POSTER);
+        this.overview = getColumnString(cursor, DatabaseContract.MovieColumns.OVERVIEW);
     }
 
     public TvShow(int id, int idT, String name, String overview, String releaseDate, String poster, String userScore) {
@@ -59,8 +75,8 @@ public class TvShow implements Parcelable {
         return idT;
     }
 
-    public void setIdT(int idM) {
-        this.idT = idM;
+    public void setIdT(int idT) {
+        this.idT = idT;
     }
 
     public String getName() {

@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.nadji.moviecatalogue.R;
+import com.nadji.moviecatalogue.entity.Movie;
 import com.nadji.moviecatalogue.entity.TvShow;
 
 import java.util.ArrayList;
@@ -41,9 +42,9 @@ public class TvshowAdapter extends RecyclerView.Adapter<TvshowAdapter.ListViewHo
         notifyDataSetChanged();
     }
 
-    public ArrayList<TvShow> getListTvshow() {
-        return list;
-    }
+//    public ArrayList<Movie> getListTvshow() {
+//        return list;
+//    }
 
     public interface OnItemTvShowClickCallback {
         void onitemTvshowClicked(TvShow data);

@@ -1,7 +1,13 @@
 package com.nadji.moviecatalogue.entity;
 
+import android.database.Cursor;
 import android.os.Parcel;
 import android.os.Parcelable;
+
+import com.nadji.moviecatalogue.db.DatabaseContract;
+
+import static com.nadji.moviecatalogue.db.DatabaseContract.getColumnInt;
+import static com.nadji.moviecatalogue.db.DatabaseContract.getColumnString;
 
 public class Movie implements Parcelable {
     private int id;
@@ -15,7 +21,17 @@ public class Movie implements Parcelable {
     public Movie() {
     }
 
-    protected Movie(Parcel in) {
+    public Movie(Cursor cursor) {
+        this.id = getColumnInt(cursor, DatabaseContract.MovieColumns._ID);
+        this.idM = getColumnInt(cursor, DatabaseContract.MovieColumns.IDM);
+        this.name = getColumnString(cursor, DatabaseContract.MovieColumns.TITLE);
+        this.overview = getColumnString(cursor, DatabaseContract.MovieColumns.OVERVIEW);
+        this.releaseDate = getColumnString(cursor, DatabaseContract.MovieColumns.RELEASE_DATE);
+        this.poster = getColumnString(cursor, DatabaseContract.MovieColumns.POSTER);
+        this.overview = getColumnString(cursor, DatabaseContract.MovieColumns.OVERVIEW);
+    }
+
+    public Movie(Parcel in) {
         id = in.readInt();
         idM = in.readInt();
         name = in.readString();

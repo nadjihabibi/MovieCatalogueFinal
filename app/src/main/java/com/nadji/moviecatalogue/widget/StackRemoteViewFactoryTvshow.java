@@ -12,44 +12,46 @@ import android.widget.RemoteViewsService;
 
 import com.bumptech.glide.Glide;
 import com.nadji.moviecatalogue.R;
-import com.nadji.moviecatalogue.entity.Movie;
+import com.nadji.moviecatalogue.entity.TvShow;
 
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
-import static com.nadji.moviecatalogue.db.DatabaseContract.MovieColumns.CONTENT_URI_MOVIE;
+import static com.nadji.moviecatalogue.db.DatabaseContract.MovieColumns.CONTENT_URI_TVSHOW;
 
-class StackRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory {
-    private final ArrayList<Movie> moviesItems = new ArrayList<>();
+class StackRemoteViewFactoryTvshow implements RemoteViewsService.RemoteViewsFactory {
+    private final ArrayList<TvShow> tvshowItems = new ArrayList<>();
     private Context mContext;
     private Cursor cursor;
 
-    public StackRemoteViewsFactory(Context context) {
+    public StackRemoteViewFactoryTvshow(Context context) {
         mContext = context;
     }
 
     @Override
     public void onCreate() {
+
     }
 
     @Override
     public void onDataSetChanged() {
-        if (moviesItems.size() != 0) {
-            moviesItems.clear();
+        if (tvshowItems.size() != 0) {
+            tvshowItems.clear();
         }
 
         final long identityToken = Binder.clearCallingIdentity();
 
         // querying ke database
-        cursor = mContext.getContentResolver().query(CONTENT_URI_MOVIE, null, null, null, null);
+        cursor = mContext.getContentResolver().query(CONTENT_URI_TVSHOW, null, null, null, null);
         if (cursor != null) {
             for (int i = 0; i < cursor.getCount(); i++) {
                 cursor.moveToPosition(i);
-                Movie movie = new Movie(cursor);
-                moviesItems.add(movie);
+                TvShow movie = new TvShow(cursor);
+                tvshowItems.add(movie);
             }
         }
         Binder.restoreCallingIdentity(identityToken);
+
     }
 
     @Override
@@ -61,15 +63,15 @@ class StackRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory {
 
     @Override
     public int getCount() {
-        return moviesItems.size();
+        return tvshowItems.size();
     }
 
     @Override
     public RemoteViews getViewAt(int position) {
-        RemoteViews rv = new RemoteViews(mContext.getPackageName(), R.layout.widget_item);
+        RemoteViews rv = new RemoteViews(mContext.getPackageName(), R.layout.widget_item_tvshow);
 
-        if (moviesItems.size() != 0) {
-            String urlPoster = moviesItems.get(position).getPoster();
+        if (tvshowItems.size() != 0) {
+            String urlPoster = tvshowItems.get(position).getPoster();
             if (urlPoster != null) {
                 String url = "https://image.tmdb.org/t/p/w185" + urlPoster;
                 try {
@@ -78,19 +80,20 @@ class StackRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory {
                             .load(url)
                             .submit()
                             .get();
-                    rv.setImageViewBitmap(R.id.image_view_widget, bitmap);
+                    rv.setImageViewBitmap(R.id.image_view_widget_tvshow, bitmap);
                 } catch (InterruptedException | ExecutionException e) {
                     e.printStackTrace();
                 }
             }
+            Log.e("tesss", "" + urlPoster);
         }
 
         Bundle extras = new Bundle();
-        extras.putString(FavoriteMovieWidget.EXTRA_TITLE, moviesItems.get(position).getTitle());
+        extras.putString(FavoriteTvShowWidget.EXTRA_TITLE, tvshowItems.get(position).getName());
         Intent fillInIntent = new Intent();
         fillInIntent.putExtras(extras);
 
-        rv.setOnClickFillInIntent(R.id.image_view_widget, fillInIntent);
+        rv.setOnClickFillInIntent(R.id.image_view_widget_tvshow, fillInIntent);
         return rv;
     }
 
@@ -105,7 +108,7 @@ class StackRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory {
     }
 
     @Override
-    public long getItemId(int i) {
+    public long getItemId(int position) {
         return 0;
     }
 
@@ -114,4 +117,3 @@ class StackRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory {
         return false;
     }
 }
-

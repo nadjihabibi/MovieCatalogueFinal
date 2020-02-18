@@ -1,9 +1,11 @@
 package com.nadji.moviecatalogue.ui.detail;
 
+import android.appwidget.AppWidgetManager;
+import android.content.ComponentName;
 import android.content.ContentValues;
+import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,11 +21,11 @@ import com.bumptech.glide.Glide;
 import com.nadji.moviecatalogue.R;
 import com.nadji.moviecatalogue.db.FavoriteHelper;
 import com.nadji.moviecatalogue.entity.TvShow;
+import com.nadji.moviecatalogue.widget.FavoriteTvShowWidget;
 
 import java.util.Objects;
 
 import static com.nadji.moviecatalogue.db.DatabaseContract.MovieColumns.CONTENT_URI_TVSHOW;
-import static com.nadji.moviecatalogue.db.DatabaseContract.MovieColumns.IDM;
 import static com.nadji.moviecatalogue.db.DatabaseContract.MovieColumns.IDT;
 import static com.nadji.moviecatalogue.db.DatabaseContract.MovieColumns.NAME;
 import static com.nadji.moviecatalogue.db.DatabaseContract.MovieColumns.OVERVIEW;
@@ -97,10 +99,12 @@ public class TvshowDetailActivity extends AppCompatActivity {
         if (item.getItemId() == R.id.action_add_fav) {
             getContentResolver().insert(CONTENT_URI_TVSHOW, values);
             item.setIcon(R.drawable.ic_favorite);
+            updateFavoriteMoviesStackWidget();
             Toast.makeText(TvshowDetailActivity.this, getResources().getString(R.string.success_add_favorite), Toast.LENGTH_SHORT).show();
         } else if (item.getItemId() == R.id.action_delete_fav) {
             getContentResolver().delete(uriWithId, null, null);
             item.setIcon(R.drawable.ic_favorite_border);
+            updateFavoriteMoviesStackWidget();
             Toast.makeText(TvshowDetailActivity.this, getResources().getString(R.string.success_delete_favorite), Toast.LENGTH_SHORT).show();
         }
         return super.onOptionsItemSelected(item);
@@ -112,5 +116,13 @@ public class TvshowDetailActivity extends AppCompatActivity {
         } else {
             progressBar.setVisibility(View.INVISIBLE);
         }
+    }
+
+    private void updateFavoriteMoviesStackWidget() {
+        Context context = getApplicationContext();
+        AppWidgetManager widgetManager = AppWidgetManager.getInstance(context);
+        ComponentName componentName = new ComponentName(context, FavoriteTvShowWidget.class);
+        int[] idAppWidget = widgetManager.getAppWidgetIds(componentName);
+        widgetManager.notifyAppWidgetViewDataChanged(idAppWidget, R.id.stack_view);
     }
 }
