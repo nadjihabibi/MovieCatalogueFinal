@@ -3,6 +3,7 @@ package com.nadji.moviecatalogue.widget;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -17,6 +18,7 @@ import com.nadji.moviecatalogue.R;
 public class FavoriteMovieWidget extends AppWidgetProvider {
 
     private static final String TOAST_ACTION = "com.nadji.moviecatalogue.TOAST_ACTION";
+    private static final String UPDATE_WIDGET = "com.nadji.moviecatalogue.UPDATE_WIDGET";
     public static final String EXTRA_ITEM = "com.nadji.moviecatalogue.EXTRA_ITEM";
 
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
@@ -31,10 +33,11 @@ public class FavoriteMovieWidget extends AppWidgetProvider {
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.favorite_movie_widget);
         views.setRemoteAdapter(R.id.stack_view, intent);
         views.setEmptyView(R.id.stack_view, R.id.empty_view);
-//        views.setTextViewText(R.id.appwidget_text, widgetText);
+
         Intent toastIntent = new Intent(context, FavoriteMovieWidget.class);
         toastIntent.setAction(FavoriteMovieWidget.TOAST_ACTION);
         toastIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
+
         intent.setData(Uri.parse(intent.toUri(Intent.URI_INTENT_SCHEME)));
         PendingIntent toastPendingIntent = PendingIntent.getBroadcast(context, 0, toastIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         views.setPendingIntentTemplate(R.id.stack_view, toastPendingIntent);
@@ -58,8 +61,19 @@ public class FavoriteMovieWidget extends AppWidgetProvider {
             if (intent.getAction().equals(TOAST_ACTION)) {
                 int viewIndex = intent.getIntExtra(EXTRA_ITEM, 0);
                 Toast.makeText(context, "Touched view " + viewIndex, Toast.LENGTH_SHORT).show();
+//                context = getApplicationContext();
+//                AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
+//                ComponentName thisWidget = new ComponentName(context, FavoriteMovieWidget.class);
+//                int[] appWidgetIds = appWidgetManager.getAppWidgetIds(thisWidget);
+//                appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetIds, R.id.stack_view);
+
             }
+        }
+        if (intent.getAction() == UPDATE_WIDGET) {
+            int widgetIDs[] = AppWidgetManager.getInstance(context).getAppWidgetIds(new ComponentName(context, FavoriteMovieWidget.class));
+
+            for (int id : widgetIDs)
+                AppWidgetManager.getInstance(context).notifyAppWidgetViewDataChanged(id, R.id.stack_view);
         }
     }
 }
-

@@ -1,6 +1,7 @@
 package com.nadji.moviecatalogue.ui.detail;
 
 import android.content.ContentValues;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
@@ -17,6 +18,7 @@ import com.bumptech.glide.Glide;
 import com.nadji.moviecatalogue.R;
 import com.nadji.moviecatalogue.db.FavoriteHelper;
 import com.nadji.moviecatalogue.entity.Movie;
+import com.nadji.moviecatalogue.widget.FavoriteMovieWidget;
 
 import java.util.Objects;
 
@@ -34,6 +36,7 @@ public class MovieDetailActivity extends AppCompatActivity {
     private Movie movie;
     private ProgressBar progressBar;
     private Uri uriWithId;
+    public static final String UPDATE_WIDGET = "com.nadji.moviecatalogue.UPDATE_WIDGET";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,6 +97,19 @@ public class MovieDetailActivity extends AppCompatActivity {
         if (item.getItemId() == R.id.action_add_fav) {
             getContentResolver().insert(CONTENT_URI_MOVIE, values);
             item.setIcon(R.drawable.ic_favorite);
+
+//            Intent i = new Intent(this, FavoriteMovieWidget.class);
+//            i.setAction(FavoriteMovieWidget.UPDATE_WIDGET, app);
+//            this.sendBroadcast(i);
+            Intent i = new Intent(getApplicationContext(), FavoriteMovieWidget.class);
+            i.setAction(UPDATE_WIDGET);
+            getApplicationContext().sendBroadcast(i);
+
+//            Intent widgetUpdateIntent = new Intent(context, MyClassName.UpdateService.class);
+//            context.startService(widgetUpdateIntent );
+
+
+
             Toast.makeText(MovieDetailActivity.this, getResources().getString(R.string.success_add_favorite), Toast.LENGTH_SHORT).show();
         } else if (item.getItemId() == R.id.action_delete_fav) {
             getContentResolver().delete(uriWithId, null, null);
