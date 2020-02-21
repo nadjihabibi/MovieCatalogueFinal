@@ -22,10 +22,9 @@
     <string name="movie_search">Movie Search</string>
     <string name="tvshow_search">TvShow Search</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="reminder_setting">Reminder setting</string>
     <string name="daily_reminder">Daily reminder</string>
-    <string name="release_today">Release Today Reminde</string>
+    <string name="release_today">Release Today Reminder</string>
     <string name="return_toapp">Reminder for return to App</string>
     <string name="release_reminder">Reminder release today movie</string>
     <string name="title_daily_reminder">Hi Good Morning !!</string>
@@ -35,6 +34,7 @@
     <string name="release_today_reminder">Release Today Reminder setup</string>
     <string name="release_today_cancel">Release today reminder canceled</string>
     <string name="appwidget_text">Favorite Movies Banner</string>
-    <string name="empty_text">NO DATA 1234</string>
-    <string name="add_widget">Add widget</string>
+    <string name="appwidget_tvshow_text">Favorite TvShow Banner</string>
+    <string name="empty_widget_movie">Empty Favorite Movie</string>
+    <string name="empty_widget_tvshow">Empty Favorite TvShow</string>
 </resources>

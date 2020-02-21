@@ -17,12 +17,12 @@ import com.nadji.moviecatalogue.R;
 public class FavoriteTvShowWidget extends AppWidgetProvider {
 
     private static final String TOAST_ACTION = "com.nadji.moviecatalogue.TOAST_ACTION";
-    public static final String EXTRA_TITLE = "com.nadji.moviecatalogue.EXTRA_TITLE";
+    public static final String EXTRA_TITLE_TVSHOW = "com.nadji.moviecatalogue.EXTRA_TITLE";
 
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
                                 int appWidgetId) {
 
-        Intent intent = new Intent(context, StackWidgetServices.class);
+        Intent intent = new Intent(context, StackWidgetServicesTvshow.class);
         intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
         intent.setData(Uri.parse(intent.toUri(Intent.URI_INTENT_SCHEME)));
 
@@ -54,9 +54,9 @@ public class FavoriteTvShowWidget extends AppWidgetProvider {
     @Override
     public void onReceive(Context context, Intent intent) {
         super.onReceive(context, intent);
-        if (intent.getAction()!= null){
-            if (intent.getAction().equals(TOAST_ACTION)){
-                String title = intent.getStringExtra(EXTRA_TITLE);
+        if (intent.getAction() != null) {
+            if (intent.getAction().equals(TOAST_ACTION)) {
+                String title = intent.getStringExtra(EXTRA_TITLE_TVSHOW);
                 Toast.makeText(context, title + " Selected", Toast.LENGTH_SHORT).show();
             }
         }

@@ -15,6 +15,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     " %s TEXT NOT NULL," +
                     " %s TEXT NOT NULL," +
                     " %s TEXT NOT NULL," +
+                    " %s TEXT NOT NULL," +
                     " %s TEXT NOT NULL)",
             DatabaseContract.TABLE_FAVMOVIE,
             DatabaseContract.MovieColumns._ID,
@@ -23,12 +24,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             DatabaseContract.MovieColumns.OVERVIEW,
             DatabaseContract.MovieColumns.RELEASE_DATE,
             DatabaseContract.MovieColumns.POSTER,
+            DatabaseContract.MovieColumns.BACKDROP,
             DatabaseContract.MovieColumns.USER_SCORE
     );
 
     private static final String SQL_CREATE_TABLE_TVSHOW = String.format("CREATE TABLE %s"
                     + " (%s INTEGER," +
                     " %s INTEGER PRIMARY KEY," +
+                    " %s TEXT NOT NULL," +
                     " %s TEXT NOT NULL," +
                     " %s TEXT NOT NULL," +
                     " %s TEXT NOT NULL," +
@@ -41,6 +44,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             DatabaseContract.MovieColumns.OVERVIEW,
             DatabaseContract.MovieColumns.RELEASE_DATE,
             DatabaseContract.MovieColumns.POSTER,
+            DatabaseContract.MovieColumns.BACKDROP,
             DatabaseContract.MovieColumns.USER_SCORE
     );
 

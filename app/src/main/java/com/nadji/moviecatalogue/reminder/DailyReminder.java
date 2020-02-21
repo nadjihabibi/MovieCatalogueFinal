@@ -11,29 +11,15 @@ import android.content.Intent;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
-import android.util.Log;
 import android.widget.Toast;
 
 import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
 
-import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.AsyncHttpResponseHandler;
-import com.nadji.moviecatalogue.BuildConfig;
 import com.nadji.moviecatalogue.MainActivity;
 import com.nadji.moviecatalogue.R;
-import com.nadji.moviecatalogue.entity.Movie;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
-import java.util.Objects;
-
-import cz.msebera.android.httpclient.Header;
 
 public class DailyReminder extends BroadcastReceiver {
     private final static int DAILY_ALARM_ID = 101;

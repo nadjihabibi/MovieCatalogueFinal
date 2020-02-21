@@ -47,6 +47,7 @@ public class TvShowViewModel extends ViewModel {
                         tvShowItems.setReleaseDate(tvShow.getString("first_air_date"));
                         tvShowItems.setOverview(tvShow.getString("overview"));
                         tvShowItems.setPoster(tvShow.getString("poster_path"));
+                        tvShowItems.setBackdrop(tvShow.getString("backdrop_path"));
                         tvShowItems.setUserScore(tvShow.getString("vote_average"));
                         listItems.add(tvShowItems);
                     }

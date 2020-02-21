@@ -46,6 +46,7 @@ public class MoviesViewModel extends ViewModel {
                         movieItems.setIdM(movie.getInt("id"));
                         movieItems.setTitle(movie.getString("title"));
                         movieItems.setPoster(movie.getString("poster_path"));
+                        movieItems.setBackdrop(movie.getString("backdrop_path"));
                         movieItems.setOverview(movie.getString("overview"));
                         movieItems.setReleaseDate(movie.getString("release_date"));
                         movieItems.setUserScore(movie.getString("vote_average"));

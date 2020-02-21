@@ -19,8 +19,9 @@ public class MappingHelper {
             String overview = movieCursor.getString(movieCursor.getColumnIndexOrThrow(DatabaseContract.MovieColumns.OVERVIEW));
             String releaseDate = movieCursor.getString(movieCursor.getColumnIndexOrThrow(DatabaseContract.MovieColumns.RELEASE_DATE));
             String poster = movieCursor.getString(movieCursor.getColumnIndexOrThrow(DatabaseContract.MovieColumns.POSTER));
+            String backdrop = movieCursor.getString(movieCursor.getColumnIndexOrThrow(DatabaseContract.MovieColumns.BACKDROP));
             String userScore = movieCursor.getString(movieCursor.getColumnIndexOrThrow(DatabaseContract.MovieColumns.USER_SCORE));
-            moviesList.add(new Movie(id, idm, title, overview, releaseDate, poster, userScore));
+            moviesList.add(new Movie(id, idm, title, overview, releaseDate, poster, backdrop, userScore));
         }
         return moviesList;
     }
@@ -35,8 +36,9 @@ public class MappingHelper {
             String overview = tvshowCursor.getString(tvshowCursor.getColumnIndexOrThrow(DatabaseContract.MovieColumns.OVERVIEW));
             String releaseDate = tvshowCursor.getString(tvshowCursor.getColumnIndexOrThrow(DatabaseContract.MovieColumns.RELEASE_DATE));
             String poster = tvshowCursor.getString(tvshowCursor.getColumnIndexOrThrow(DatabaseContract.MovieColumns.POSTER));
+            String backdrop = tvshowCursor.getString(tvshowCursor.getColumnIndexOrThrow(DatabaseContract.MovieColumns.BACKDROP));
             String userScore = tvshowCursor.getString(tvshowCursor.getColumnIndexOrThrow(DatabaseContract.MovieColumns.USER_SCORE));
-            tvShowsList.add(new TvShow(id, idT, title, overview, releaseDate, poster, userScore));
+            tvShowsList.add(new TvShow(id, idT, title, overview, releaseDate, poster, backdrop, userScore));
         }
         return tvShowsList;
     }

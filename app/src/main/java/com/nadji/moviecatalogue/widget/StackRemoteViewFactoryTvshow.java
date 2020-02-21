@@ -6,11 +6,11 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.os.Binder;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
 
 import com.bumptech.glide.Glide;
+import com.nadji.moviecatalogue.BuildConfig;
 import com.nadji.moviecatalogue.R;
 import com.nadji.moviecatalogue.entity.TvShow;
 
@@ -20,9 +20,11 @@ import java.util.concurrent.ExecutionException;
 import static com.nadji.moviecatalogue.db.DatabaseContract.MovieColumns.CONTENT_URI_TVSHOW;
 
 class StackRemoteViewFactoryTvshow implements RemoteViewsService.RemoteViewsFactory {
+    private static final String URL_POSTER_W185 = BuildConfig.URL_POSTER_W185;
     private final ArrayList<TvShow> tvshowItems = new ArrayList<>();
     private Context mContext;
     private Cursor cursor;
+
 
     public StackRemoteViewFactoryTvshow(Context context) {
         mContext = context;
@@ -73,7 +75,7 @@ class StackRemoteViewFactoryTvshow implements RemoteViewsService.RemoteViewsFact
         if (tvshowItems.size() != 0) {
             String urlPoster = tvshowItems.get(position).getPoster();
             if (urlPoster != null) {
-                String url = "https://image.tmdb.org/t/p/w185" + urlPoster;
+                String url = URL_POSTER_W185 + urlPoster;
                 try {
                     Bitmap bitmap = Glide.with(mContext)
                             .asBitmap()
@@ -85,11 +87,10 @@ class StackRemoteViewFactoryTvshow implements RemoteViewsService.RemoteViewsFact
                     e.printStackTrace();
                 }
             }
-            Log.e("tesss", "" + urlPoster);
         }
 
         Bundle extras = new Bundle();
-        extras.putString(FavoriteTvShowWidget.EXTRA_TITLE, tvshowItems.get(position).getName());
+        extras.putString(FavoriteTvShowWidget.EXTRA_TITLE_TVSHOW, tvshowItems.get(position).getName());
         Intent fillInIntent = new Intent();
         fillInIntent.putExtras(extras);
 

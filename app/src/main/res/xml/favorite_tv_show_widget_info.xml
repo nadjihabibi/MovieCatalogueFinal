@@ -4,7 +4,7 @@
     android:initialLayout="@layout/favorite_tv_show_widget"
     android:minWidth="250dp"
     android:minHeight="110dp"
-    android:previewImage="@drawable/example_appwidget_preview"
+    android:previewImage="@drawable/simpson"
     android:resizeMode="horizontal|vertical"
-    android:updatePeriodMillis="86400000"
-    android:widgetCategory="home_screen"></appwidget-provider>
+    android:updatePeriodMillis="0"
+    android:widgetCategory="home_screen" />

@@ -13,6 +13,7 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField("String", "URL_POSTER_W500", '"https://image.tmdb.org/t/p/w500"')
     }
 
     buildTypes {

@@ -6,11 +6,11 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.os.Binder;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
 
 import com.bumptech.glide.Glide;
+import com.nadji.moviecatalogue.BuildConfig;
 import com.nadji.moviecatalogue.R;
 import com.nadji.moviecatalogue.entity.Movie;
 
@@ -20,6 +20,7 @@ import java.util.concurrent.ExecutionException;
 import static com.nadji.moviecatalogue.db.DatabaseContract.MovieColumns.CONTENT_URI_MOVIE;
 
 class StackRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory {
+    private static final String URL_POSTER_W185 = BuildConfig.URL_POSTER_W185;
     private final ArrayList<Movie> moviesItems = new ArrayList<>();
     private Context mContext;
     private Cursor cursor;
@@ -71,7 +72,7 @@ class StackRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory {
         if (moviesItems.size() != 0) {
             String urlPoster = moviesItems.get(position).getPoster();
             if (urlPoster != null) {
-                String url = "https://image.tmdb.org/t/p/w185" + urlPoster;
+                String url = URL_POSTER_W185 + urlPoster;
                 try {
                     Bitmap bitmap = Glide.with(mContext)
                             .asBitmap()

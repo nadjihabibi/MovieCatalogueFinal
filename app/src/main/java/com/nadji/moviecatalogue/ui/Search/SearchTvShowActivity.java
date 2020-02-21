@@ -64,21 +64,7 @@ public class SearchTvShowActivity extends AppCompatActivity {
                 }
             }
         });
-//
-//        movieSearchViewModel = new ViewModelProvider(this, new ViewModelProvider.NewInstanceFactory())
-//                .get(MovieSearchViewModel.class);
-//        movieSearchViewModel.setMovie(url);
-//        showLoading(true);
-//
-//        movieSearchViewModel.getMovies().observe(this, new Observer<ArrayList<Movie>>() {
-//            @Override
-//            public void onChanged(ArrayList<Movie> movies) {
-//                if (movies != null) {
-//                    adapterMovie.setList(movies);
-//                    showLoading(false);
-//                }
-//            }
-//        }
+
         adapter.setOnItemTvShowClickCallback(new TvshowAdapter.OnItemTvShowClickCallback() {
             @Override
             public void onitemTvshowClicked(TvShow data) {
@@ -87,16 +73,6 @@ public class SearchTvShowActivity extends AppCompatActivity {
                 startActivity(toDetail);
             }
         });
-
-//        adapterMovie.setOnItemMovieClickCallback(new MovieAdapter.OnItemMovieClickCallback() {
-//            @Override
-//            public void onItemMovieClickCallback(Movie data) {
-//                Toast.makeText(SearchMovieActivity.this, "" + data, Toast.LENGTH_SHORT).show();
-//                Intent toDetail = new Intent(SearchMovieActivity.this, MovieDetailActivity.class);
-//                toDetail.putExtra(MovieDetailActivity.EXTRA_MOVIE, data);
-//                startActivity(toDetail);
-//            }
-//        });
     }
 
     @Override

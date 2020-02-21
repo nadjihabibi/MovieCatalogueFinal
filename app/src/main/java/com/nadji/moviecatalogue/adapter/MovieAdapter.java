@@ -11,12 +11,14 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.nadji.moviecatalogue.BuildConfig;
 import com.nadji.moviecatalogue.R;
 import com.nadji.moviecatalogue.entity.Movie;
 
 import java.util.ArrayList;
 
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ListViewHolder> {
+    private static final String URL_POSTER_W185 = BuildConfig.URL_POSTER_W185;
     private ArrayList<Movie> list;
     public Context context;
     private OnItemMovieClickCallback onItemMovieClickCallback;
@@ -93,7 +95,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ListViewHold
             tvRilis.setText(movieItems.getReleaseDate());
             tvDetail.setText(movieItems.getOverview());
             tvScore.setText(movieItems.getUserScore());
-            Glide.with(itemView).load("https://image.tmdb.org/t/p/w185/" + movieItems.getPoster()).into(imgposter);
+            Glide.with(itemView).load(URL_POSTER_W185 + movieItems.getPoster()).into(imgposter);
         }
     }
 }

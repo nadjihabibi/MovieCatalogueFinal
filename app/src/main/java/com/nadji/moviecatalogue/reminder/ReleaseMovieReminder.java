@@ -45,7 +45,6 @@ public class ReleaseMovieReminder extends BroadcastReceiver {
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String currentDate = dateFormat.format(calendar.getTime());
-//        Log.e("date", "Current date :  " + currentDate);
 
         AsyncHttpClient client = new AsyncHttpClient();
         String url = URL_MOVIE_RELEASE + currentDate + "&primary_release_date.lte=" + currentDate;

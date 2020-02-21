@@ -91,21 +91,8 @@ public class MovieFavFragment extends Fragment implements LoadMovieCallback {
         });
 
         super.onStart();
-//        showLoading(false);
     }
 
-//    @Override
-//    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-//        super.onActivityCreated(savedInstanceState);
-//        if (savedInstanceState == null) {
-//            new LoadMovieAsync(getContext(), this).execute();
-//        } else {
-//            ArrayList<Movie> list = savedInstanceState.getParcelableArrayList(EXTRA_STATE);
-//            if (list != null) {
-//                adapterMovie.setFavMovie(listMovie);
-//            }
-//        }
-//    }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -113,26 +100,6 @@ public class MovieFavFragment extends Fragment implements LoadMovieCallback {
         rvMovie = view.findViewById(R.id.rv_movie);
         progressBar = view.findViewById(R.id.progressBar_movie);
     }
-
-//    @Override
-//    public void onSaveInstanceState(@NonNull Bundle outState) {
-//        super.onSaveInstanceState(outState);
-//        outState.putParcelableArrayList(EXTRA_STATE, adapterMovie.getListMovie());
-//    }
-
-//    @Override
-//    public void onDestroy() {
-//        super.onDestroy();
-////        favoriteHelper.close();
-//    }
-
-//    private void showLoading(Boolean state) {
-//        if (state) {
-//            progressBar.setVisibility(View.VISIBLE);
-//        } else {
-//            progressBar.setVisibility(View.INVISIBLE);
-//        }
-//    }
 
     @Override
     public void preExecute() {

@@ -19,6 +19,7 @@ public class DatabaseContract {
         public static final String OVERVIEW = "overview";
         public static final String RELEASE_DATE = "releaseDate";
         public static final String POSTER = "poster";
+        public static final String BACKDROP = "backdrop";
         public static final String USER_SCORE = "userScore";
 
         public static final Uri CONTENT_URI_MOVIE = new Uri.Builder().scheme(SCHEME_MOVIE)

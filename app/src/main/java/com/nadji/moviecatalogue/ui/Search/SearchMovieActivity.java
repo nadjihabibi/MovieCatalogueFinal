@@ -68,7 +68,6 @@ public class SearchMovieActivity extends AppCompatActivity {
         adapterMovie.setOnItemMovieClickCallback(new MovieAdapter.OnItemMovieClickCallback() {
             @Override
             public void onItemMovieClickCallback(Movie data) {
-                Toast.makeText(SearchMovieActivity.this, "" + data, Toast.LENGTH_SHORT).show();
                 Intent toDetail = new Intent(SearchMovieActivity.this, MovieDetailActivity.class);
                 toDetail.putExtra(MovieDetailActivity.EXTRA_MOVIE, data);
                 startActivity(toDetail);

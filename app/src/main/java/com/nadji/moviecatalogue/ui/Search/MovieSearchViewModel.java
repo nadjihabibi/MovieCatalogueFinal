@@ -8,7 +8,6 @@ import androidx.lifecycle.ViewModel;
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
-import com.nadji.moviecatalogue.BuildConfig;
 import com.nadji.moviecatalogue.entity.Movie;
 
 import org.json.JSONArray;
@@ -39,9 +38,9 @@ public class MovieSearchViewModel extends ViewModel {
                         JSONObject movie = result.getJSONObject(i);
                         Movie movieItems = new Movie();
 
-//                        movieItems.setId(movie.getInt("id"));
                         movieItems.setTitle(movie.getString("title"));
                         movieItems.setPoster(movie.getString("poster_path"));
+                        movieItems.setBackdrop(movie.getString("backdrop_path"));
                         movieItems.setOverview(movie.getString("overview"));
                         movieItems.setReleaseDate(movie.getString("release_date"));
                         movieItems.setUserScore(movie.getString("vote_average"));

@@ -11,13 +11,14 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.nadji.moviecatalogue.BuildConfig;
 import com.nadji.moviecatalogue.R;
-import com.nadji.moviecatalogue.entity.Movie;
 import com.nadji.moviecatalogue.entity.TvShow;
 
 import java.util.ArrayList;
 
 public class TvshowAdapter extends RecyclerView.Adapter<TvshowAdapter.ListViewHolder> {
+    private static final String URL_POSTER_W185 = BuildConfig.URL_POSTER_W185;
     private ArrayList<TvShow> list;
     public Context context;
     private OnItemTvShowClickCallback onItemTvShowClickCallback;
@@ -97,7 +98,7 @@ public class TvshowAdapter extends RecyclerView.Adapter<TvshowAdapter.ListViewHo
             tvRilis.setText(tvShow.getReleaseDate());
             tvDetail.setText(tvShow.getOverview());
             tvScore.setText(tvShow.getUserScore());
-            Glide.with(itemView).load("https://image.tmdb.org/t/p/w185/" + tvShow.getPoster()).into(imgposter);
+            Glide.with(itemView).load(URL_POSTER_W185 + tvShow.getPoster()).into(imgposter);
 
         }
     }

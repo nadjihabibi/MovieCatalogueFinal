@@ -12,10 +12,11 @@ import static com.nadji.moviecatalogue.db.DatabaseContract.getColumnString;
 public class Movie implements Parcelable {
     private int id;
     private int idM;
-    private String name;
+    private String title;
     private String overview;
     private String releaseDate;
     private String poster;
+    private String backdrop;
     private String userScore;
 
     public Movie() {
@@ -24,30 +25,33 @@ public class Movie implements Parcelable {
     public Movie(Cursor cursor) {
         this.id = getColumnInt(cursor, DatabaseContract.MovieColumns._ID);
         this.idM = getColumnInt(cursor, DatabaseContract.MovieColumns.IDM);
-        this.name = getColumnString(cursor, DatabaseContract.MovieColumns.TITLE);
+        this.title = getColumnString(cursor, DatabaseContract.MovieColumns.TITLE);
         this.overview = getColumnString(cursor, DatabaseContract.MovieColumns.OVERVIEW);
         this.releaseDate = getColumnString(cursor, DatabaseContract.MovieColumns.RELEASE_DATE);
         this.poster = getColumnString(cursor, DatabaseContract.MovieColumns.POSTER);
+        this.backdrop = getColumnString(cursor, DatabaseContract.MovieColumns.BACKDROP);
         this.overview = getColumnString(cursor, DatabaseContract.MovieColumns.OVERVIEW);
     }
 
     public Movie(Parcel in) {
         id = in.readInt();
         idM = in.readInt();
-        name = in.readString();
+        title = in.readString();
         overview = in.readString();
         releaseDate = in.readString();
         poster = in.readString();
+        backdrop = in.readString();
         userScore = in.readString();
     }
 
-    public Movie(int id, int idM, String name, String overview, String releaseDate, String poster, String userScore) {
+    public Movie(int id, int idM, String title, String overview, String releaseDate, String poster, String backdrop, String userScore) {
         this.id = id;
         this.idM = idM;
-        this.name = name;
+        this.title = title;
         this.overview = overview;
         this.releaseDate = releaseDate;
         this.poster = poster;
+        this.backdrop = backdrop;
         this.userScore = userScore;
     }
 
@@ -80,11 +84,11 @@ public class Movie implements Parcelable {
     }
 
     public String getTitle() {
-        return name;
+        return title;
     }
 
     public void setTitle(String title) {
-        this.name = title;
+        this.title = title;
     }
 
     public String getOverview() {
@@ -111,6 +115,14 @@ public class Movie implements Parcelable {
         this.poster = poster;
     }
 
+    public String getBackdrop() {
+        return backdrop;
+    }
+
+    public void setBackdrop(String backdrop) {
+        this.backdrop = backdrop;
+    }
+
     public String getUserScore() {
         return userScore;
     }
@@ -128,10 +140,11 @@ public class Movie implements Parcelable {
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeInt(id);
         parcel.writeInt(idM);
-        parcel.writeString(name);
+        parcel.writeString(title);
         parcel.writeString(overview);
         parcel.writeString(releaseDate);
         parcel.writeString(poster);
+        parcel.writeString(backdrop);
         parcel.writeString(userScore);
     }
 }

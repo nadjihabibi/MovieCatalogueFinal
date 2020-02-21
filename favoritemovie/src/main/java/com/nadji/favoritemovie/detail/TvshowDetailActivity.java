@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
+import com.nadji.favoritemovie.BuildConfig;
 import com.nadji.favoritemovie.R;
 import com.nadji.favoritemovie.entity.TvShow;
 
@@ -22,6 +23,7 @@ import java.util.Objects;
 import static com.nadji.favoritemovie.helper.DatabaseContract.MovieColumns.CONTENT_URI_TVSHOW;
 
 public class TvshowDetailActivity extends AppCompatActivity {
+    private static final String URL_POSTER_W500 = BuildConfig.URL_POSTER_W500;
     public static final String EXTRA_TV = "extra_tvshow";
     private TvShow tvShow;
     ProgressBar progressBar;
@@ -40,7 +42,7 @@ public class TvshowDetailActivity extends AppCompatActivity {
         TextView tvScore = findViewById(R.id.tv_score_tvshow);
         TextView tvRilis = findViewById(R.id.tv_releasedate_tvshow);
         TextView tvDesc = findViewById(R.id.tv_desc_tvshow);
-        Glide.with(this).load("https://image.tmdb.org/t/p/w500/" + tvShow.getPoster()).into(imgPoster);
+        Glide.with(this).load(URL_POSTER_W500 + tvShow.getBackdrop()).into(imgPoster);
         tvJudul.setText(tvShow.getName());
         tvScore.setText(tvShow.getUserScore());
         tvRilis.setText(tvShow.getReleaseDate());

@@ -1,6 +1,8 @@
 package com.nadji.moviecatalogue.ui.movies;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +11,7 @@ import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -23,7 +26,9 @@ import com.nadji.moviecatalogue.ui.detail.MovieDetailActivity;
 import java.util.ArrayList;
 
 public class MoviesFragment extends Fragment {
-    public ArrayList<Movie> listMovies = new ArrayList<>();
+    private ArrayList<Movie> listMovies = new ArrayList<>();
+//    public ArrayList<Movie> listMovies = new ArrayList<>();
+//    Variable yang hanya digunakan pada kelas yang sama sebaiknya dijadikan private.
     private MoviesViewModel moviesViewModel;
     private MovieAdapter adapterMovie;
     private ProgressBar progressBar;
@@ -58,9 +63,6 @@ public class MoviesFragment extends Fragment {
                 }
             }
         });
-
-//        myRecyclerView.findViewHolderForAdapterPosition(pos);
-//        rvMovie.findViewHolderForLayoutPosition()
 
         adapterMovie.setOnItemMovieClickCallback(new MovieAdapter.OnItemMovieClickCallback() {
             @Override

@@ -66,7 +66,10 @@ public class TvshowAdapter extends RecyclerView.Adapter<TvshowAdapter.ListViewHo
 
     public class ListViewHolder extends RecyclerView.ViewHolder {
         TextView tvJudul, tvRilis, tvDetail, tvScore;
-        ImageView imgposter;
+        final ImageView imgposter;
+//        ImageView imgPoster;
+//        Variabel yang tidak mengalami perubahan dapat ditambahkan final modifier.
+
 
         public ListViewHolder(@NonNull View itemView) {
             super(itemView);

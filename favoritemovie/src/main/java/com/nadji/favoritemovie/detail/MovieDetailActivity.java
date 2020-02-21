@@ -13,6 +13,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
+import com.nadji.favoritemovie.BuildConfig;
 import com.nadji.favoritemovie.R;
 import com.nadji.favoritemovie.entity.Movie;
 
@@ -21,8 +22,10 @@ import java.util.Objects;
 import static com.nadji.favoritemovie.helper.DatabaseContract.MovieColumns.CONTENT_URI_MOVIE;
 
 public class MovieDetailActivity extends AppCompatActivity {
+    private static final String URL_POSTER_W500 = BuildConfig.URL_POSTER_W500;
     public static final String EXTRA_MOVIE = "extra_movie";
-    private Movie movie;
+    //    private Movie movie;
+//    Variabel (Movie) yang hanya digunakan pada sebuah fungsi dapat dijadikan variabel lokal.
     private ProgressBar progressBar;
     private Uri uriWithId;
 
@@ -30,7 +33,7 @@ public class MovieDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_detail);
-        movie = getIntent().getParcelableExtra(EXTRA_MOVIE);
+        Movie movie = getIntent().getParcelableExtra(EXTRA_MOVIE);
         setTitle(getResources().getString(R.string.title_movies));
 
         progressBar = findViewById(R.id.progressBar_detail_movie);
@@ -39,7 +42,7 @@ public class MovieDetailActivity extends AppCompatActivity {
         TextView tvScore = findViewById(R.id.tv_score);
         TextView tvRilis = findViewById(R.id.tv_release_date);
         TextView tvDesc = findViewById(R.id.tv_desc);
-        Glide.with(this).load("https://image.tmdb.org/t/p/w500/" + movie.getPoster()).into(imgPoster);
+        Glide.with(this).load(URL_POSTER_W500 + movie.getBackdrop()).into(imgPoster);
         tvJudul.setText(movie.getTitle());
         tvScore.setText(movie.getUserScore());
         tvRilis.setText(movie.getReleaseDate());

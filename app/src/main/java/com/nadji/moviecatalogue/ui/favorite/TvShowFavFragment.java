@@ -98,26 +98,6 @@ public class TvShowFavFragment extends Fragment implements LoadTvShowCallback {
         progressBar = view.findViewById(R.id.progress_tvshow);
     }
 
-//    @Override
-//    public void onSaveInstanceState(@NonNull Bundle outState) {
-//        super.onSaveInstanceState(outState);
-//        outState.putParcelableArrayList(EXTRA_STATE, adapter.getListTvshow());
-//    }
-
-//    @Override
-//    public void onDestroy() {
-//        super.onDestroy();
-//        favoriteHelper.close();
-//    }
-
-//    private void showLoading(Boolean state) {
-//        if (state) {
-//            progressBar.setVisibility(View.VISIBLE);
-//        } else {
-//            progressBar.setVisibility(View.INVISIBLE);
-//        }
-//    }
-
     @Override
     public void preExecute() {
         progressBar.setVisibility(View.VISIBLE);

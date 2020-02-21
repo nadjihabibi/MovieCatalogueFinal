@@ -16,6 +16,7 @@ public class TvShow implements Parcelable {
     private String overview;
     private String releaseDate;
     private String poster;
+    private String backdrop;
     private String userScore;
 
     public TvShow() {
@@ -24,20 +25,22 @@ public class TvShow implements Parcelable {
     public TvShow(Cursor cursor){
         this.id = getColumnInt(cursor, DatabaseContract.MovieColumns._ID);
         this.idT = getColumnInt(cursor, DatabaseContract.MovieColumns.IDT);
-        this.name = getColumnString(cursor, DatabaseContract.MovieColumns.TITLE);
+        this.name = getColumnString(cursor, DatabaseContract.MovieColumns.NAME);
         this.overview = getColumnString(cursor, DatabaseContract.MovieColumns.OVERVIEW);
         this.releaseDate = getColumnString(cursor, DatabaseContract.MovieColumns.RELEASE_DATE);
         this.poster = getColumnString(cursor, DatabaseContract.MovieColumns.POSTER);
+        this.backdrop = getColumnString(cursor, DatabaseContract.MovieColumns.BACKDROP);
         this.overview = getColumnString(cursor, DatabaseContract.MovieColumns.OVERVIEW);
     }
 
-    public TvShow(int id, int idT, String name, String overview, String releaseDate, String poster, String userScore) {
+    public TvShow(int id, int idT, String name, String overview, String releaseDate, String poster,String backdrop, String userScore) {
         this.id = id;
         this.idT = idT;
         this.name = name;
         this.overview = overview;
         this.releaseDate = releaseDate;
         this.poster = poster;
+        this.backdrop = backdrop;
         this.userScore = userScore;
     }
 
@@ -48,6 +51,7 @@ public class TvShow implements Parcelable {
         overview = in.readString();
         releaseDate = in.readString();
         poster = in.readString();
+        backdrop = in.readString();
         userScore = in.readString();
     }
 
@@ -111,6 +115,14 @@ public class TvShow implements Parcelable {
         this.poster = poster;
     }
 
+    public String getBackdrop() {
+        return backdrop;
+    }
+
+    public void setBackdrop(String backdrop) {
+        this.backdrop = backdrop;
+    }
+
     public String getUserScore() {
         return userScore;
     }
@@ -132,6 +144,7 @@ public class TvShow implements Parcelable {
         parcel.writeString(overview);
         parcel.writeString(releaseDate);
         parcel.writeString(poster);
+        parcel.writeString(backdrop);
         parcel.writeString(userScore);
     }
 }

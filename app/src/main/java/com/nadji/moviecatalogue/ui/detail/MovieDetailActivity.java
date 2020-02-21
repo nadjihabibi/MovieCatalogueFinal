@@ -4,6 +4,8 @@ import android.appwidget.AppWidgetManager;
 import android.content.ComponentName;
 import android.content.ContentValues;
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
@@ -17,6 +19,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
+import com.nadji.moviecatalogue.BuildConfig;
 import com.nadji.moviecatalogue.R;
 import com.nadji.moviecatalogue.db.FavoriteHelper;
 import com.nadji.moviecatalogue.entity.Movie;
@@ -24,6 +27,7 @@ import com.nadji.moviecatalogue.widget.FavoriteMovieWidget;
 
 import java.util.Objects;
 
+import static com.nadji.moviecatalogue.db.DatabaseContract.MovieColumns.BACKDROP;
 import static com.nadji.moviecatalogue.db.DatabaseContract.MovieColumns.CONTENT_URI_MOVIE;
 import static com.nadji.moviecatalogue.db.DatabaseContract.MovieColumns.IDM;
 import static com.nadji.moviecatalogue.db.DatabaseContract.MovieColumns.OVERVIEW;
@@ -33,12 +37,12 @@ import static com.nadji.moviecatalogue.db.DatabaseContract.MovieColumns.TITLE;
 import static com.nadji.moviecatalogue.db.DatabaseContract.MovieColumns.USER_SCORE;
 
 public class MovieDetailActivity extends AppCompatActivity {
+    private static final String URL_POSTER_W500 = BuildConfig.URL_POSTER_W500;
     public static final String EXTRA_MOVIE = "extra_movie";
     private FavoriteHelper favoriteHelper;
     private Movie movie;
     private ProgressBar progressBar;
     private Uri uriWithId;
-    public static final String UPDATE_WIDGET = "com.nadji.moviecatalogue.UPDATE_WIDGET";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +57,7 @@ public class MovieDetailActivity extends AppCompatActivity {
         TextView tvScore = findViewById(R.id.tv_score);
         TextView tvRilis = findViewById(R.id.tv_release_date);
         TextView tvDesc = findViewById(R.id.tv_desc);
-        Glide.with(this).load("https://image.tmdb.org/t/p/w500/" + movie.getPoster()).into(imgPoster);
+        Glide.with(this).load(URL_POSTER_W500 + movie.getBackdrop()).into(imgPoster);
         tvJudul.setText(movie.getTitle());
         tvScore.setText(movie.getUserScore());
         tvRilis.setText(movie.getReleaseDate());
@@ -92,6 +96,7 @@ public class MovieDetailActivity extends AppCompatActivity {
         values.put(IDM, movie.getIdM());
         values.put(TITLE, movie.getTitle());
         values.put(POSTER, movie.getPoster());
+        values.put(BACKDROP, movie.getBackdrop());
         values.put(OVERVIEW, movie.getOverview());
         values.put(USER_SCORE, movie.getUserScore());
         values.put(RELEASE_DATE, movie.getReleaseDate());

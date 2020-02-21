@@ -16,6 +16,8 @@ android {
         buildConfigField("String", "URL_TVSHOW", '"https://api.themoviedb.org/3/discover/tv?api_key="')
         buildConfigField("String", "URL_SEARCH_TVSHOW", '"https://api.themoviedb.org/3/search/tv?api_key=18222d581ee6599d31d217ca743dd55e&language=en-US&query="')
         buildConfigField("String", "URL_MOVIE_RELEASE", '"https://api.themoviedb.org/3/discover/movie?api_key=18222d581ee6599d31d217ca743dd55e&primary_release_date.gte="')
+        buildConfigField("String", "URL_POSTER_W185", '"https://image.tmdb.org/t/p/w185"')
+        buildConfigField("String", "URL_POSTER_W500", '"https://image.tmdb.org/t/p/w500"')
 
 
     }
